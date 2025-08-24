@@ -567,6 +567,15 @@ export default function ProductsPage() {
             <IndexTable.Cell />
             <IndexTable.Cell>
               <InlineStack gap="200" blockAlign="center">
+                <Tooltip content={variant.mapEnabled ? "Disable MAP" : "Enable MAP"}>
+                  <Button
+                    icon={variant.mapEnabled ? ToggleOnIcon : ToggleOffIcon}
+                    variant="plain"
+                    size="micro"
+                    accessibilityLabel={variant.mapEnabled ? "Disable MAP" : "Enable MAP"}
+                    onClick={() => handleToggleMAP(variant.id, variant.mapEnabled)}
+                  />
+                </Tooltip>
                 <Badge 
                   tone={
                     variant.mapCompliance === "active" ? "success" :
@@ -582,14 +591,6 @@ export default function ProductsPage() {
                     "Not Set"
                   }
                 </Badge>
-                <Tooltip content={variant.mapEnabled ? "Disable MAP" : "Enable MAP"}>
-                  <Button
-                    icon={variant.mapEnabled ? ToggleOnIcon : ToggleOffIcon}
-                    variant="tertiary"
-                    size="micro"
-                    onClick={() => handleToggleMAP(variant.id, variant.mapEnabled)}
-                  />
-                </Tooltip>
               </InlineStack>
             </IndexTable.Cell>
             <IndexTable.Cell>
@@ -637,14 +638,16 @@ export default function ProductsPage() {
                 <Tooltip content="Edit variant">
                   <Button
                     icon={EditIcon}
-                    variant="tertiary"
+                    variant="plain"
+                    accessibilityLabel="Edit variant"
                     onClick={() => handleEditVariant(variant.id)}
                   />
                 </Tooltip>
                 <Tooltip content="View variant">
                   <Button
                     icon={ViewIcon}
-                    variant="tertiary"
+                    variant="plain"
+                    accessibilityLabel="View variant"
                     onClick={() => handleViewVariant(variant.id)}
                   />
                 </Tooltip>
@@ -753,7 +756,7 @@ export default function ProductsPage() {
             { title: "Cost", id: "column-header--cost" },
             { title: "Profit margin", id: "column-header--profit-margin" },
             { title: "Inventory", id: "column-header--inventory" },
-            { title: "Actions", id: "column-header--actions" },
+            { title: "", id: "column-header--actions" },
           ]}
           sortable={[true, true, true, false, false, true, true, true, true, true, true, true, false]}
           pagination={{

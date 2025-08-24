@@ -41,15 +41,15 @@ export default function App() {
         <ul className={styles.list}>
           <li>
             <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+            how it helps merchants.
           </li>
           <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+            <strong>Another product feature</strong>. Some detail about your
+            feature and how it helps merchants.
           </li>
           <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+            <strong>Something else your app does</strong>. Some detail about
+            your feature and how it helps merchants.
           </li>
         </ul>
       </div>

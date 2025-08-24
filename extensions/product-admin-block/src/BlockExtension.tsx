@@ -8,8 +8,7 @@ import {
   Badge,
   Box,
   Divider,
-  Button,
-  Image,
+  Pressable,
   Icon,
 } from '@shopify/ui-extensions-react/admin';
 import { useState } from 'react';
@@ -19,67 +18,61 @@ const TARGET = 'admin.product-details.block.render';
 
 export default reactExtension(TARGET, () => <App />);
 
-// Mock data for MAP overview with more compact structure
+// Mock data for MAP overview - will be replaced with util functions later
 const mockVariants = [
   {
     id: '1',
     title: 'Small',
     price: '$29.99',
     mapPrice: '$24.99',
-    actualPrice: '$26.99',
+    finalPrice: '$26.99',
     mapEnabled: true,
-    compliance: 'active',
-    image: 'https://via.placeholder.com/32x32/007bff/ffffff?text=S'
+    compliance: 'active' as const
   },
   {
     id: '2',
     title: 'Medium',
     price: '$34.99',
     mapPrice: '$29.99',
-    actualPrice: '$19.99',
+    finalPrice: '$19.99',
     mapEnabled: true,
-    compliance: 'violation',
-    image: 'https://via.placeholder.com/32x32/dc3545/ffffff?text=M'
+    compliance: 'violation' as const
   },
   {
     id: '3',
     title: 'Large',
     price: '$39.99',
     mapPrice: '$34.99',
-    actualPrice: '$35.99',
+    finalPrice: '$35.99',
     mapEnabled: false,
-    compliance: 'disable',
-    image: 'https://via.placeholder.com/32x32/ffc107/000000?text=L'
+    compliance: 'disable' as const
   },
   {
     id: '4',
     title: 'X-Large',
     price: '$42.99',
     mapPrice: null,
-    actualPrice: '$38.99',
+    finalPrice: '$38.99',
     mapEnabled: false,
-    compliance: 'not_set',
-    image: 'https://via.placeholder.com/32x32/6c757d/ffffff?text=XL'
+    compliance: 'not_set' as const
   },
   {
     id: '5',
     title: 'XX-Large',
     price: '$44.99',
     mapPrice: '$39.99',
-    actualPrice: '$42.99',
+    finalPrice: '$42.99',
     mapEnabled: true,
-    compliance: 'active',
-    image: 'https://via.placeholder.com/32x32/28a745/ffffff?text=XXL'
+    compliance: 'active' as const
   },
   {
     id: '6',
     title: '3X-Large',
     price: '$46.99',
     mapPrice: '$41.99',
-    actualPrice: '$30.99',
+    finalPrice: '$30.99',
     mapEnabled: true,
-    compliance: 'violation',
-    image: 'https://via.placeholder.com/32x32/17a2b8/ffffff?text=3XL'
+    compliance: 'violation' as const
   },
 ];
 
@@ -98,16 +91,20 @@ function App() {
   // Status counts
   const violationCount = mockVariants.filter(v => v.compliance === 'violation').length;
 
+  // TODO: Replace with util functions for MAP management
   const handleEditMAP = (variantId: string) => {
     console.log('Edit MAP for variant:', variantId);
+    // Will be replaced with: mapUtils.editMAP(variantId)
   };
 
   const handleToggleMAP = (variantId: string, currentState: boolean) => {
     console.log('Toggle MAP for variant:', variantId, 'from', currentState, 'to', !currentState);
+    // Will be replaced with: mapUtils.toggleMAP(variantId, !currentState)
   };
 
   const handleSetMAP = (variantId: string) => {
     console.log('Set MAP for variant:', variantId);
+    // Will be replaced with: mapUtils.setMAP(variantId)
   };
 
   const getBadgeTone = (compliance: string) => {
@@ -144,9 +141,9 @@ function App() {
                 {mockVariants.length} variant{mockVariants.length !== 1 ? 's' : ''}
               </Text>
             </InlineStack>
-            <Button onPress={() => console.log('Settings')}>
+            <Pressable onPress={() => console.log('Settings')} accessibilityLabel="Settings">
               <Icon name="SettingsMinor" />
-            </Button>
+            </Pressable>
           </InlineStack>
         </Box>
 
@@ -155,10 +152,29 @@ function App() {
         {/* Header Row */}
         <Box paddingInline="base" paddingBlock="base">
           <InlineStack gap="base" blockAlignment="center" inlineAlignment="space-between">
-            <Text fontWeight="bold">Variant</Text>
+            {/* Left side - Variant column header */}
+            <Box minInlineSize={120}>
+              <Text fontWeight="bold">Variant</Text>
+            </Box>
+            
+            {/* Middle - Price columns */}
             <InlineStack gap="base" blockAlignment="center">
-              <Text fontWeight="bold">Status</Text>
-              <Text fontWeight="bold">Actions</Text>
+              <Box minInlineSize={80}>
+                <Text fontWeight="bold">MAP Price</Text>
+              </Box>
+              <Box minInlineSize={80}>
+                <Text fontWeight="bold">Final Price</Text>
+              </Box>
+            </InlineStack>
+            
+            {/* Right side - Status and Actions headers */}
+            <InlineStack gap="base" blockAlignment="center">
+              <Box minInlineSize={120}>
+                <Text fontWeight="bold">Status</Text>
+              </Box>
+              <Box minInlineSize={80}>
+                {/* No header for actions column */}
+              </Box>
             </InlineStack>
           </InlineStack>
         </Box>
@@ -169,39 +185,53 @@ function App() {
         <BlockStack gap="none">
           {currentVariants.map((variant, index) => (
             <Box key={variant.id}>
-              <Box paddingInline="base" paddingBlock="none">
+              <Box paddingInline="base" paddingBlock="base">
                 <InlineStack gap="base" blockAlignment="center" inlineAlignment="space-between">
-                  {/* Variant Info */}
-                  <BlockStack gap="none">
+                  {/* Variant Info - Fixed width for alignment */}
+                  <Box minInlineSize={120}>
                     <Text fontWeight="bold">{variant.title}</Text>
-                    <InlineStack gap="base">
-                      <Text>MAP: {variant.mapPrice || '—'}</Text>
-                      <Text>Actual: {variant.actualPrice}</Text>
-                    </InlineStack>
-                  </BlockStack>
+                  </Box>
 
-                  {/* Status & Actions */}
+                  {/* Price columns */}
                   <InlineStack gap="base" blockAlignment="center">
-                    <Badge tone={getBadgeTone(variant.compliance)}>
-                      {getBadgeText(variant.compliance)}
-                    </Badge>
+                    <Box minInlineSize={80}>
+                      <Text>{variant.mapPrice || '—'}</Text>
+                    </Box>
+                    <Box minInlineSize={80}>
+                      <Text>{variant.finalPrice || '—'}</Text>
+                    </Box>
+                  </InlineStack>
+
+                  {/* Status & Actions - Right aligned */}
+                  <InlineStack gap="base" blockAlignment="center">
+                    <Box minInlineSize={120}>
+                      <InlineStack gap="base" blockAlignment="center">
+                        <Icon name={variant.mapEnabled ? "ViewMinor" : "HideMinor"} />
+                        <Badge tone={getBadgeTone(variant.compliance)}>
+                          {getBadgeText(variant.compliance)}
+                        </Badge>
+                      </InlineStack>
+                    </Box>
                     
-                    <InlineStack gap="base">
-                      {variant.mapPrice ? (
-                        <>
-                          <Button onPress={() => handleEditMAP(variant.id)}>
+                    <Box minInlineSize={80}>
+                      <InlineStack gap="base">
+                        {variant.mapPrice ? (
+                          <Pressable
+                            onPress={() => handleEditMAP(variant.id)}
+                            accessibilityLabel="Edit MAP"
+                          >
                             <Icon name="EditMinor" />
-                          </Button>
-                          <Button onPress={() => handleToggleMAP(variant.id, variant.mapEnabled)}>
-                            <Icon name={variant.mapEnabled ? "HideMinor" : "ViewMinor"} />
-                          </Button>
-                        </>
-                      ) : (
-                        <Button onPress={() => handleSetMAP(variant.id)}>
-                          <Icon name="PlusMinor" />
-                        </Button>
-                      )}
-                    </InlineStack>
+                          </Pressable>
+                        ) : (
+                          <Pressable
+                            onPress={() => handleSetMAP(variant.id)}
+                            accessibilityLabel="Set MAP"
+                          >
+                            <Icon name="PlusMinor" />
+                          </Pressable>
+                        )}
+                      </InlineStack>
+                    </Box>
                   </InlineStack>
                 </InlineStack>
               </Box>
@@ -216,21 +246,21 @@ function App() {
             <Divider />
             <Box padding="base">
               <InlineStack gap="base" inlineAlignment="center" blockAlignment="center">
-                <Button
-                  disabled={currentPage === 0}
-                  onPress={() => setCurrentPage(currentPage - 1)}
+                <Pressable
+                  onPress={currentPage === 0 ? undefined : () => setCurrentPage(currentPage - 1)}
+                  accessibilityLabel="Previous page"
                 >
                   <Icon name="ChevronLeftMinor" />
-                </Button>
+                </Pressable>
                 <Text>
                   {currentPage + 1} of {totalPages}
                 </Text>
-                <Button
-                  disabled={currentPage === totalPages - 1}
-                  onPress={() => setCurrentPage(currentPage + 1)}
+                <Pressable
+                  onPress={currentPage === totalPages - 1 ? undefined : () => setCurrentPage(currentPage + 1)}
+                  accessibilityLabel="Next page"
                 >
                   <Icon name="ChevronRightMinor" />
-                </Button>
+                </Pressable>
               </InlineStack>
             </Box>
           </>

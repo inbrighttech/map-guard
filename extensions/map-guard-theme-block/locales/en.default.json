@@ -1,0 +1,27 @@
+{
+  "map_guard": {
+    "name": "MAP Guard",
+    "settings": {
+      "show_map_price": {
+        "label": "Show MAP Price"
+      },
+      "map_label": {
+        "label": "MAP Price Label",
+        "info": "Text displayed before the MAP price"
+      },
+      "show_compliance_badge": {
+        "label": "Show Compliance Badge"
+      },
+      "compliant_text": {
+        "label": "Compliant Badge Text"
+      },
+      "violation_text": {
+        "label": "Violation Badge Text"
+      },
+      "default_message": {
+        "label": "Default Violation Message",
+        "info": "Message shown when no custom message is set"
+      }
+    }
+  }
+}

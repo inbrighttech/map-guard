@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "ef1998fd5d05c71f96ad439fd2b19e0e"
-application_url = "https://channels-dozens-drinks-polished.trycloudflare.com"
+application_url = "https://allow-deputy-si-reasoning.trycloudflare.com"
 embedded = true
 name = "map-guard"
 handle = "map-guard"
@@ -27,9 +27,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://channels-dozens-drinks-polished.trycloudflare.com/auth/callback",
-  "https://channels-dozens-drinks-polished.trycloudflare.com/auth/shopify/callback",
-  "https://channels-dozens-drinks-polished.trycloudflare.com/api/auth/callback"
+  "https://allow-deputy-si-reasoning.trycloudflare.com/auth/callback",
+  "https://allow-deputy-si-reasoning.trycloudflare.com/auth/shopify/callback",
+  "https://allow-deputy-si-reasoning.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]

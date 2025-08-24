@@ -1,0 +1,337 @@
+{%- comment -%}
+  MAP Guard Message Display Block
+  Shows discount message with configurable icon
+{%- endcomment -%}
+
+{%- liquid
+  # Get variant from context
+  assign current_variant = product.selected_or_first_available_variant
+
+  # Get custom message from metafields
+  assign custom_message = current_variant.metafields.map_guard.discount_message.value
+
+  # Use custom message if available, otherwise use block setting, otherwise use default
+  assign display_message = custom_message
+  if display_message == blank
+    assign display_message = block.settings.default_message
+  endif
+  if display_message == blank
+    assign display_message = 'Add to cart for lower price'
+  endif
+-%}
+
+<div class="map-guard-message-block" data-variant-id="{{ current_variant.id }}">
+  {%- if block.settings.show_icon -%}
+    <div class="map-guard-icon">
+      {%- case block.settings.icon_type -%}
+        {%- when 'cart' -%}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+          </svg>
+        {%- when 'tag' -%}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+          </svg>
+        {%- when 'discount' -%}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+          </svg>
+        {%- when 'info' -%}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+          </svg>
+        {%- else -%}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+          </svg>
+      {%- endcase -%}
+    </div>
+  {%- endif -%}
+
+  <div class="map-guard-message">
+    {{ display_message }}
+  </div>
+</div>
+
+<style>
+  .map-guard-message-block {
+    background: {{ block.settings.background_color | default: '#f8fafc' }};
+    border: 1px solid {{ block.settings.border_color | default: '#e2e8f0' }};
+    border-radius: {{ block.settings.border_radius | default: 8 }}px;
+    padding: {{ block.settings.padding | default: '1rem' }};
+    margin: {{ block.settings.margin | default: '1rem 0' }};
+    font-family: {{ block.settings.font_family | default: 'inherit' }};
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: {{ block.settings.text_align | default: 'left' }};
+  }
+
+  .map-guard-icon {
+    width: {{ block.settings.icon_size | default: 24 }}px;
+    height: {{ block.settings.icon_size | default: 24 }}px;
+    flex-shrink: 0;
+  }
+
+  .map-guard-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: {{ block.settings.icon_color | default: '#64748b' }};
+    fill: none;
+  }
+
+  .map-guard-message {
+    margin: 0;
+    font-size: {{ block.settings.font_size | default: '1rem' }};
+    font-weight: {{ block.settings.font_weight | default: 500 }};
+    color: {{ block.settings.text_color | default: '#1e293b' }};
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .map-guard-message-block {
+      padding: 0.75rem;
+      margin: 0.75rem 0;
+      gap: 0.5rem;
+    }
+
+    .map-guard-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .map-guard-message {
+      font-size: 0.875rem;
+    }
+  }
+</style>
+
+<script>
+  // Update MAP Guard message block when variant changes
+  document.addEventListener('DOMContentLoaded', function () {
+    const messageBlock = document.querySelector('.map-guard-message-block');
+    if (!messageBlock) return;
+
+    // Listen for variant changes
+    document.addEventListener('variant:change', function (event) {
+      if (event.detail && event.detail.variant) {
+        updateMessageBlock(event.detail.variant);
+      }
+    });
+
+    // Also listen for standard Shopify variant selector changes
+    const variantSelectors = document.querySelectorAll('[name="id"]');
+    variantSelectors.forEach((selector) => {
+      selector.addEventListener('change', function () {
+        const variantId = this.value;
+        updateMessageForVariant(variantId);
+      });
+    });
+  });
+
+  function updateMessageBlock(variant) {
+    const messageBlock = document.querySelector('.map-guard-message-block');
+    if (!messageBlock) return;
+
+    // Update the variant ID data attribute
+    messageBlock.setAttribute('data-variant-id', variant.id);
+
+    // You could add AJAX calls here to fetch updated message data
+    // For now, we'll rely on the page refresh for variant changes
+  }
+
+  function updateMessageForVariant(variantId) {
+    // This would typically make an AJAX call to get updated message data
+    // Implementation depends on your app's API endpoints
+    console.log('Variant changed to:', variantId);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "MAP Guard Message",
+  "target": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Icon Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show Icon",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "icon_type",
+      "label": "Icon Type",
+      "default": "tag",
+      "options": [
+        {
+          "value": "cart",
+          "label": "Shopping Cart"
+        },
+        {
+          "value": "tag",
+          "label": "Price Tag"
+        },
+        {
+          "value": "discount",
+          "label": "Discount Ticket"
+        },
+        {
+          "value": "info",
+          "label": "Information"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#64748b"
+    },
+    {
+      "type": "header",
+      "content": "Message Settings"
+    },
+    {
+      "type": "textarea",
+      "id": "default_message",
+      "label": "Default Message",
+      "default": "Add to cart for lower price",
+      "info": "Customer-facing message shown when no custom message is set for the variant"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "font_weight",
+      "label": "Font Weight",
+      "min": 300,
+      "max": 700,
+      "step": 100,
+      "default": 500
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1e293b"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Block Styling"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8fafc"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#e2e8f0"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border Radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "padding",
+      "label": "Padding",
+      "default": "1rem",
+      "info": "CSS padding value (e.g., 1rem, 16px, 1rem 2rem)"
+    },
+    {
+      "type": "text",
+      "id": "margin",
+      "label": "Margin",
+      "default": "1rem 0",
+      "info": "CSS margin value (e.g., 1rem 0, 16px, 1rem 2rem)"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,14 @@
+name = "map-guard-theme-block"
+handle = "map-guard-theme-block"
+type = "theme"
+
+[[extensions]]
+type = "theme"
+name = "map-guard-theme-block"
+handle = "map-guard-theme-block"
+
+[extensions.extension_points]
+
+[[extensions.extension_points.entry]]
+target = "shopify://product/blocks/app"
+
