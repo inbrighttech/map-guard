@@ -24,64 +24,213 @@
       "none": "None",
       "all": "All",
       "yes": "Yes",
-      "no": "No"
+      "no": "No",
+      "save_settings": "Save Settings",
+      "back_to_dashboard": "Back to Dashboard",
+      "export": "Export",
+      "import": "Import",
+      "enable": "Enable",
+      "disable": "Disable",
+      "actions": "Actions",
+      "show_more": "Show More",
+      "show_less": "Show Less"
+    }
+  },
+  "dashboard": {
+    "title": "MAP Guard Dashboard",
+    "welcome": {
+      "title": "Welcome to MAP Guard",
+      "description": "Get started by configuring your MAP policies and admin blocks in the {setupLink}."
+    },
+    "overview": {
+      "title": "Quick Overview",
+      "total_products": "Total Products",
+      "map_enabled": "MAP Enabled", 
+      "violations": "Violations"
+    },
+    "quick_actions": {
+      "title": "Quick Actions",
+      "setup_map_guard": "Setup MAP Guard",
+      "manage_products": "Manage Products",
+      "app_settings": "App Settings"
+    },
+    "getting_started": {
+      "title": "Getting Started",
+      "description": "MAP Guard helps you maintain minimum advertised price policies across your Shopify store. Here's how to get started:",
+      "step_1": "Setup Metafields: Configure the required metafields for storing MAP data",
+      "step_2": "Configure Admin Blocks: Enable the product and variant admin blocks in your theme",
+      "step_3": "Set MAP Prices: Use the admin blocks or products page to set MAP prices for your variants",
+      "step_4": "Monitor Compliance: Track compliance status and manage violations from the dashboard"
     }
   },
   "setup": {
-    "title": "Setup Guide",
-    "subtitle": "Get started with MAP Guard in just a few steps",
-    "steps": {
-      "configure": {
-        "title": "Configure Products",
-        "description": "Set MAP prices for your products that need price protection",
-        "action": "Go to Products"
+    "title": "Setup",
+    "metafield_setup": {
+      "required_title": "Metafield Setup Required",
+      "required_description": "{count} metafield definition{plural} need to be created before you can use MAP Guard. Click the button below to create them automatically.",
+      "complete_title": "Setup Complete!",
+      "complete_description": "All required metafield definitions have been created. You can now configure MAP settings for your products.",
+      "create_button": "Create Missing Metafields"
+    },
+    "metafields": {
+      "title": "Metafield Definitions",
+      "table_headers": {
+        "key": "Key",
+        "name": "Name", 
+        "type": "Type",
+        "description": "Description",
+        "status": "Status"
       },
-      "theme": {
-        "title": "Install Theme Block",
-        "description": "Add the MAP Guard theme block to your store theme",
-        "action": "View Installation Guide"
-      },
-      "test": {
-        "title": "Test & Launch",
-        "description": "Verify everything works correctly before going live",
-        "action": "Run Tests"
+      "status": {
+        "created": "Created",
+        "missing": "Missing"
       }
     },
-    "features": {
-      "title": "Key Features",
-      "enforcement": {
-        "title": "Price Enforcement",
-        "description": "Automatically enforces minimum advertised prices"
-      },
-      "theme_block": {
-        "title": "Theme Integration",
-        "description": "Seamless integration with your store theme"
-      },
-      "analytics": {
-        "title": "Analytics",
-        "description": "Track compliance and performance metrics"
-      }
+    "admin_block": {
+      "title": "Admin Block Configuration",
+      "description": "The MAP Guard admin block will appear on product detail pages in your Shopify admin. This block provides quick access to MAP settings for each product variant.",
+      "features_title": "Admin Block Features:",
+      "features": [
+        "Variant Overview: See all variants with their MAP status at a glance",
+        "Quick Actions: Edit MAP prices, toggle MAP protection, and set new MAP values", 
+        "Status Badges: Visual indicators for Active, Violation, Disabled, and Not Set states",
+        "Compact Design: Table-like interface with pagination for products with many variants"
+      ],
+      "access_title": "How to Access:",
+      "access_steps": [
+        "Go to any product in your Shopify admin",
+        "Scroll down to find the \"MAP Guard\" block in the sidebar",
+        "Use the block to manage MAP settings for all product variants"
+      ],
+      "note_missing": "Note: The admin block will only display MAP data after the metafield definitions are created. Create the metafields above to enable full functionality.",
+      "ready": "Ready! The admin block is now fully configured and ready to use. Visit any product page in your admin to start managing MAP settings."
+    },
+    "variant_admin_block": {
+      "title": "Variant Admin Block Configuration",
+      "description": "The Variant Admin Block provides MAP management for individual product variants. This block appears on product variant detail pages in the Shopify admin.",
+      "features_title": "Block Features:",
+      "features": [
+        "Toggle Control: Enable/disable MAP enforcement per variant",
+        "Status Badge: Visual compliance indicator (Compliant/Violation/Not Set)",
+        "Inline Editing: Direct MAP and Final price editing",
+        "Custom Messages: Editable MAP enforcement messages",
+        "Delete Function: Remove MAP settings when needed"
+      ],
+      "location": "Location:",
+      "extension_id": "Extension ID:",
+      "file_location": "File Location:",
+      "note_missing": "Note: The variant admin block will only display MAP data after the metafield definitions are created. Create the metafields above to enable full functionality.",
+      "ready": "Ready! The variant admin block is now fully configured and ready to use. Visit any product variant page in your admin to start managing individual variant MAP settings."
+    },
+    "theme_block": {
+      "title": "Theme Block Configuration",
+      "description": "The MAP Guard Theme Block displays discount messages on your storefront product pages. This block allows customers to see MAP-related messaging and automatically strikes through prices below MAP.",
+      "installation_title": "Installation Steps:",
+      "installation_steps": [
+        "Access Theme Editor: Go to Online Store → Themes → Customize",
+        "Navigate to Product Page: Select \"Product pages\" from the template dropdown",
+        "Add Block: Click \"Add block\" or \"Add section\" and look for \"MAP Guard Message\"",
+        "Position Block: Place it near the product price area for best visibility",
+        "Configure Settings: Customize the message, icon, and styling options",
+        "Save Theme: Publish your changes"
+      ],
+      "features_title": "Block Features:",
+      "features": [
+        "Configurable Icons: Choose from cart, tag, discount, or info icons",
+        "Custom Messages: Display default or variant-specific discount messages",
+        "Price Strike-Through: Automatically strikes through prices below MAP",
+        "Responsive Design: Works on desktop and mobile devices",
+        "Theme Integration: Matches your store's design seamlessly"
+      ],
+      "customization_title": "Customization Options:",
+      "customization_options": [
+        "Message Settings: Default text, font size, weight, and color",
+        "Icon Settings: Show/hide, type selection, size, and color",
+        "Block Styling: Background, border, radius, padding, and margin",
+        "Strike-Through: Enable/disable automatic price striking",
+        "Testing: Fallback MAP price for development"
+      ],
+      "message_priority_title": "Message Priority (How Messages Are Selected):",
+      "message_priority_steps": [
+        "Custom Variant Message: From variant metafield map_guard.discount_message",
+        "Block Default Message: Set in theme editor (default: \"Add to cart for lower price\")",
+        "Fallback Message: Hard-coded backup if nothing is configured"
+      ],
+      "strike_through_title": "Price Strike-Through Feature:",
+      "strike_through_description": "When enabled, this feature automatically detects price elements on the page and strikes through prices that are below the MAP price. It works with most Shopify themes and handles:",
+      "strike_through_features": [
+        "Variant price changes",
+        "Dynamic content loading", 
+        "Multiple price formats",
+        "Responsive design"
+      ],
+      "note_missing": "Note: For the theme block to display variant-specific messages and MAP data, create the metafield definitions above first. The block will work with default messages even without metafields.",
+      "ready": "Ready! The theme block can now access metafield data. Install it in your theme editor and start customizing the storefront experience."
+    },
+    "next_steps": {
+      "title": "Next Steps",
+      "description": "After creating the metafield definitions:",
+      "steps": [
+        "Install Theme Block: Add the MAP Guard Message block to your product pages in the theme editor",
+        "Configure Theme Block: Customize the message, icon, styling, and enable price strike-through",
+        "Test Admin Blocks: Visit product and variant pages to test the MAP Guard admin blocks",
+        "Set MAP Prices: Start configuring MAP settings for your products and variants",
+        "Configure Messages: Set up custom discount messages in Settings or per-variant",
+        "Monitor Compliance: Use the Products page to track MAP compliance across your catalog"
+      ]
+    },
+    "help": {
+      "title": "Need Help?",
+      "description": "Having trouble with setup or configuration? Check out our comprehensive {faqLink} for answers to common questions about metafields, admin blocks, theme configuration, and troubleshooting."
     }
   },
   "products": {
-    "title": "Product Management",
-    "subtitle": "Configure MAP settings for your products",
-    "search_placeholder": "Search products...",
+    "title": "Products",
+    "search_placeholder": "Searching in all products",
+    "filters": {
+      "product_status": "Product status",
+      "map_status": "MAP Status", 
+      "vendor": "Vendor",
+      "product_type": "Product type"
+    },
     "table": {
       "product": "Product",
-      "map_price": "MAP Price",
+      "sku": "SKU",
+      "vendor": "Vendor",
       "status": "Status",
-      "actions": "Actions"
+      "map_status": "MAP status",
+      "map_price": "MAP price",
+      "actual_price": "Actual price",
+      "final_price": "Final price",
+      "discount_percent": "Discount %",
+      "cost": "Cost",
+      "profit_margin": "Profit margin",
+      "inventory": "Inventory"
     },
     "status": {
       "active": "Active",
       "inactive": "Inactive",
-      "pending": "Pending"
+      "pending": "Pending",
+      "compliant": "Compliant",
+      "violation": "Violation",
+      "not_set": "Not set",
+      "disabled": "Disabled"
     },
     "actions": {
       "edit_map": "Edit MAP Price",
-      "disable": "Disable",
-      "enable": "Enable"
+      "view": "View",
+      "enable_map": "Enable MAP",
+      "disable_map": "Disable MAP",
+      "delete_map": "Delete MAP settings"
+    },
+    "bulk_actions": {
+      "enable_map": "Enable MAP",
+      "disable_map": "Disable MAP",
+      "delete_settings": "Delete MAP settings"
+    },
+    "delete_modal": {
+      "title": "Delete MAP settings",
+      "description": "Are you sure you want to delete MAP settings for the selected variants? This action cannot be undone."
     },
     "empty_state": {
       "title": "No products configured",
@@ -91,26 +240,69 @@
   },
   "settings": {
     "title": "Settings",
-    "subtitle": "Configure your MAP Guard preferences",
-    "sections": {
-      "general": {
-        "title": "General Settings",
-        "app_name": "App Name",
-        "enable_notifications": "Enable Notifications",
-        "auto_enforcement": "Automatic Enforcement"
-      },
-      "display": {
-        "title": "Display Settings", 
-        "message_text": "Custom Message Text",
-        "icon_style": "Icon Style",
-        "theme_integration": "Theme Integration"
-      },
-      "advanced": {
-        "title": "Advanced Settings",
-        "api_access": "API Access",
-        "webhook_url": "Webhook URL",
-        "debug_mode": "Debug Mode"
-      }
+    "banner": {
+      "title": "Message Configuration",
+      "description": "Configure how MAP messages appear on your product pages. Changes will apply to all products with MAP protection enabled."
+    },
+    "message_content": {
+      "title": "Message Content",
+      "default_message_label": "Default MAP Message",
+      "default_message_placeholder": "Add to cart for lower price",
+      "default_message_help": "This message will be displayed instead of showing the discount amount.",
+      "custom_css_label": "Custom CSS (Optional)",
+      "custom_css_placeholder": ".map-message { /* Your custom styles */ }",
+      "custom_css_help": "Add custom CSS to further customize the appearance."
+    },
+    "visual_styling": {
+      "title": "Visual Styling",
+      "text_color_label": "Text Color",
+      "text_color_help": "Choose the text color for MAP messages.",
+      "background_color_label": "Background Color", 
+      "background_color_help": "Choose the background color for MAP messages.",
+      "font_size_label": "Font Size",
+      "text_alignment_label": "Text Alignment"
+    },
+    "font_sizes": {
+      "small": "Small",
+      "medium": "Medium", 
+      "large": "Large"
+    },
+    "alignments": {
+      "left": "Left",
+      "center": "Center",
+      "right": "Right"
+    },
+    "icon_settings": {
+      "title": "Icon Settings",
+      "show_icon_label": "Show icon with message",
+      "icon_type_label": "Icon Type",
+      "icon_type_help": "Choose an icon to display alongside the MAP message."
+    },
+    "icon_types": {
+      "cart": "Shopping Cart",
+      "price": "Price Tag",
+      "lock": "Lock",
+      "none": "None"
+    },
+    "preview": {
+      "title": "Preview",
+      "description": "This is how your MAP message will appear on product pages."
+    },
+    "usage_tips": {
+      "title": "Usage Tips",
+      "tips": [
+        "Keep messages short and clear",
+        "Use action-oriented language like \"Add to cart\"",
+        "Test different styles to match your theme",
+        "Consider your brand colors and fonts"
+      ]
+    },
+    "common_messages": {
+      "title": "Common Messages",
+      "add_to_cart": "Add to cart for lower price",
+      "call_for_price": "Call for price",
+      "special_pricing": "Special pricing available",
+      "contact_us": "Contact us for better pricing"
     }
   },
   "plans": {
@@ -214,6 +406,10 @@
   "faq": {
     "title": "Frequently Asked Questions",
     "subtitle": "Find answers to common questions about MAP Guard",
+    "banner": {
+      "title": "Need Help?",
+      "description": "Find answers to common questions about MAP Guard setup, configuration, and troubleshooting. If you can't find what you're looking for, check the Setup page for detailed configuration guides."
+    },
     "sections": {
       "getting_started": {
         "title": "Getting Started",
@@ -225,6 +421,22 @@
           {
             "question": "How does MAP Guard work?",
             "answer": "MAP Guard automatically monitors and enforces your minimum advertised prices by displaying custom messages when prices fall below your set thresholds."
+          },
+          {
+            "question": "Is MAP Guard compatible with all Shopify themes?",
+            "answer": "Yes! MAP Guard uses smart CSS selectors that work with most Shopify themes. The price strike-through feature automatically detects price elements regardless of theme structure."
+          },
+          {
+            "question": "Can I customize the messages shown to customers?",
+            "answer": "Absolutely! You can set default messages in the theme editor and override them with custom messages per product variant using metafields."
+          },
+          {
+            "question": "Does MAP Guard affect my store's performance?",
+            "answer": "No, MAP Guard is optimized for performance. The theme block uses efficient JavaScript and CSS that doesn't impact page load times."
+          },
+          {
+            "question": "What happens if I don't set up metafields?",
+            "answer": "The admin blocks will show placeholder data and the theme block will use default messages. For full functionality, you should create the metafield definitions in the Setup page."
           }
         ]
       },
@@ -238,6 +450,30 @@
           {
             "question": "Can I customize the enforcement message?",
             "answer": "Yes! You can customize the message text, styling, and icon through the Settings page to match your brand."
+          },
+          {
+            "question": "How do I get started with MAP Guard?",
+            "answer": "Start by going to the Setup page and clicking 'Create Missing Metafields'. This sets up the required data storage for MAP Guard to work properly with your products and variants."
+          },
+          {
+            "question": "Why do I need to create these data fields?",
+            "answer": "These data fields (called metafields) allow MAP Guard to store MAP prices, settings, and custom messages directly in Shopify. Without them, the admin tools won't be able to save your MAP configuration."
+          },
+          {
+            "question": "What happens if I accidentally delete the setup data?",
+            "answer": "Deleting the setup data will remove MAP prices and settings from all products and variants. The MAP Guard blocks will fall back to default behavior. You can recreate the setup from the Setup page, but you'll need to reconfigure your products."
+          },
+          {
+            "question": "Can I modify the data fields after creating them?",
+            "answer": "Once created, the data fields cannot be easily modified through MAP Guard. You would need to delete and recreate them, which will lose existing data. It's best to set them up correctly the first time using our Setup page."
+          },
+          {
+            "question": "How do I know if the setup worked correctly?",
+            "answer": "After completing setup, visit any product page in your admin. You should see the MAP Guard admin block with options to set MAP prices. Look for 'Created' status on the Setup page."
+          },
+          {
+            "question": "What if the setup process fails?",
+            "answer": "Check your app permissions and try again. If it continues to fail, ensure you have the necessary permissions to create data fields in your Shopify store. You may need store owner or staff permissions."
           }
         ]
       },
@@ -251,6 +487,26 @@
           {
             "question": "How is billing handled?",
             "answer": "All billing is processed securely through Shopify's App Billing system. Charges appear on your regular Shopify invoice."
+          },
+          {
+            "question": "Can I change my plan anytime?",
+            "answer": "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and billing is prorated through Shopify."
+          },
+          {
+            "question": "What happens if I exceed my product limit?",
+            "answer": "We'll notify you when you approach your limit and help you upgrade to a plan that fits your needs. Your existing MAP settings will continue to work."
+          },
+          {
+            "question": "Do you offer refunds?",
+            "answer": "Since billing is handled through Shopify, refund policies follow Shopify's standard terms. Contact support for assistance with billing issues."
+          },
+          {
+            "question": "Is there a discount for annual billing?",
+            "answer": "Currently, all plans are billed monthly through Shopify. We're considering annual billing options with discounts for the future."
+          },
+          {
+            "question": "What payment methods do you accept?",
+            "answer": "All payments are processed through Shopify, so any payment method accepted by Shopify for app subscriptions will work with MAP Guard."
           }
         ]
       },
@@ -264,6 +520,34 @@
           {
             "question": "MAP enforcement isn't working",
             "answer": "Check that your products have MAP prices set and that the theme block is properly installed on your product pages."
+          },
+          {
+            "question": "The MAP Guard tools aren't showing up. What should I check?",
+            "answer": "Try these troubleshooting steps: 1) Ensure initial setup is completed (Setup page), 2) Check that the latest app version is deployed, 3) Refresh your browser and clear cache, 4) Verify the app is properly installed and permissions are granted."
+          },
+          {
+            "question": "I'm getting errors during setup. How do I fix this?",
+            "answer": "This usually indicates a permissions issue. Ensure your Shopify user account has the necessary permissions to create data fields. You may need store owner or staff permissions."
+          },
+          {
+            "question": "The storefront display is showing but not working correctly. What's wrong?",
+            "answer": "Check the browser console for error messages. Common issues include incomplete setup, incorrect MAP price configuration, or theme compatibility. Enable the fallback MAP price for testing."
+          },
+          {
+            "question": "How do I reset MAP Guard if something goes wrong?",
+            "answer": "You can delete the data fields from the Setup page to reset everything, then recreate them. For storefront displays, you can remove and re-add them in the theme editor."
+          },
+          {
+            "question": "Who can I contact for additional support?",
+            "answer": "For technical support or theme-specific assistance, contact our support team through the Shopify App Store or use the support channels provided in your MAP Guard app dashboard."
+          },
+          {
+            "question": "The price strike-through isn't working on my theme",
+            "answer": "Some themes have unique price structures. Try enabling the fallback MAP price for testing, and contact support with your theme name for specific compatibility assistance."
+          },
+          {
+            "question": "Can I test MAP Guard without affecting my live store?",
+            "answer": "Yes! Use a development theme or preview mode to test MAP Guard functionality. The admin blocks work in any environment, and you can test the theme block in preview mode."
           }
         ]
       }
