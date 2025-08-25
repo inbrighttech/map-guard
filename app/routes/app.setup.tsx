@@ -421,17 +421,112 @@ export default function SetupPage() {
             <Card>
               <BlockStack gap="400">
                 <Text variant="headingMd" as="h2">
+                  Theme Block Configuration
+                </Text>
+                <Text variant="bodyMd" as="p">
+                  The MAP Guard Theme Block displays discount messages on your storefront product pages. 
+                  This block allows customers to see MAP-related messaging and automatically strikes through prices below MAP.
+                </Text>
+
+                <BlockStack gap="300">
+                  <Text variant="headingSm" as="h3">
+                    Installation Steps:
+                  </Text>
+                  <ol>
+                    <li><strong>Access Theme Editor:</strong> Go to Online Store → Themes → Customize</li>
+                    <li><strong>Navigate to Product Page:</strong> Select "Product pages" from the template dropdown</li>
+                    <li><strong>Add Block:</strong> Click "Add block" or "Add section" and look for "MAP Guard Message"</li>
+                    <li><strong>Position Block:</strong> Place it near the product price area for best visibility</li>
+                    <li><strong>Configure Settings:</strong> Customize the message, icon, and styling options</li>
+                    <li><strong>Save Theme:</strong> Publish your changes</li>
+                  </ol>
+                </BlockStack>
+
+                <InlineStack gap="400">
+                  <div style={{ flex: 1 }}>
+                    <Text variant="headingXs" as="h3">Block Features:</Text>
+                    <ul>
+                      <li><strong>Configurable Icons:</strong> Choose from cart, tag, discount, or info icons</li>
+                      <li><strong>Custom Messages:</strong> Display default or variant-specific discount messages</li>
+                      <li><strong>Price Strike-Through:</strong> Automatically strikes through prices below MAP</li>
+                      <li><strong>Responsive Design:</strong> Works on desktop and mobile devices</li>
+                      <li><strong>Theme Integration:</strong> Matches your store's design seamlessly</li>
+                    </ul>
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <Text variant="headingXs" as="h3">Customization Options:</Text>
+                    <ul>
+                      <li><strong>Message Settings:</strong> Default text, font size, weight, and color</li>
+                      <li><strong>Icon Settings:</strong> Show/hide, type selection, size, and color</li>
+                      <li><strong>Block Styling:</strong> Background, border, radius, padding, and margin</li>
+                      <li><strong>Strike-Through:</strong> Enable/disable automatic price striking</li>
+                      <li><strong>Testing:</strong> Fallback MAP price for development</li>
+                    </ul>
+                  </div>
+                </InlineStack>
+
+                <BlockStack gap="300">
+                  <Text variant="headingSm" as="h3">
+                    Message Priority (How Messages Are Selected):
+                  </Text>
+                  <ol>
+                    <li><strong>Custom Variant Message:</strong> From variant metafield <code>map_guard.discount_message</code></li>
+                    <li><strong>Block Default Message:</strong> Set in theme editor (default: "Add to cart for lower price")</li>
+                    <li><strong>Fallback Message:</strong> Hard-coded backup if nothing is configured</li>
+                  </ol>
+                </BlockStack>
+
+                <BlockStack gap="300">
+                  <Text variant="headingSm" as="h3">
+                    Price Strike-Through Feature:
+                  </Text>
+                  <Text variant="bodyMd" as="p">
+                    When enabled, this feature automatically detects price elements on the page and strikes through 
+                    prices that are below the MAP price. It works with most Shopify themes and handles:
+                  </Text>
+                  <ul>
+                    <li>Variant price changes</li>
+                    <li>Dynamic content loading</li>
+                    <li>Multiple price formats</li>
+                    <li>Responsive design</li>
+                  </ul>
+                </BlockStack>
+
+                {!allCreated && (
+                  <Banner tone="info">
+                    <p>
+                      <strong>Note:</strong> For the theme block to display variant-specific messages and MAP data, 
+                      create the metafield definitions above first. The block will work with default messages even without metafields.
+                    </p>
+                  </Banner>
+                )}
+
+                {allCreated && (
+                  <Banner tone="success">
+                    <p>
+                      <strong>Ready!</strong> The theme block can now access metafield data. 
+                      Install it in your theme editor and start customizing the storefront experience.
+                    </p>
+                  </Banner>
+                )}
+              </BlockStack>
+            </Card>
+
+            <Card>
+              <BlockStack gap="400">
+                <Text variant="headingMd" as="h2">
                   Next Steps
                 </Text>
                 <Text variant="bodyMd" as="p">
                   After creating the metafield definitions:
                 </Text>
                 <ol>
-                  <li><strong>Configure Messages:</strong> Set up your MAP messages in Settings</li>
-                  <li><strong>Add Theme Block:</strong> Install the MAP message block in your theme</li>
+                  <li><strong>Install Theme Block:</strong> Add the MAP Guard Message block to your product pages in the theme editor</li>
+                  <li><strong>Configure Theme Block:</strong> Customize the message, icon, styling, and enable price strike-through</li>
                   <li><strong>Test Admin Blocks:</strong> Visit product and variant pages to test the MAP Guard admin blocks</li>
                   <li><strong>Set MAP Prices:</strong> Start configuring MAP settings for your products and variants</li>
-                  <li><strong>Monitor Compliance:</strong> Use the Products page to track MAP compliance</li>
+                  <li><strong>Configure Messages:</strong> Set up custom discount messages in Settings or per-variant</li>
+                  <li><strong>Monitor Compliance:</strong> Use the Products page to track MAP compliance across your catalog</li>
                 </ol>
               </BlockStack>
             </Card>

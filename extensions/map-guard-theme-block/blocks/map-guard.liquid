@@ -146,10 +146,14 @@
     const messageBlock = document.querySelector('.map-guard-message-block');
     if (!messageBlock) return;
 
+    // Initialize price strike-through functionality
+    initializePriceStrikeThrough();
+
     // Listen for variant changes
     document.addEventListener('variant:change', function (event) {
       if (event.detail && event.detail.variant) {
         updateMessageBlock(event.detail.variant);
+        checkAndStrikePrices(event.detail.variant);
       }
     });
 
@@ -159,9 +163,147 @@
       selector.addEventListener('change', function () {
         const variantId = this.value;
         updateMessageForVariant(variantId);
+        checkAndStrikePrices({ id: variantId });
       });
     });
   });
+
+  function initializePriceStrikeThrough() {
+    // Only proceed if strike-through is enabled in settings
+    if (!{{ block.settings.enable_price_strike | default: false }}) return;
+
+    // Apply initial price strike-through
+    checkAndStrikePrices({{ product.selected_or_first_available_variant | json }});
+
+    // Set up mutation observer for dynamic price updates
+    setupPriceObserver();
+  }
+
+  function checkAndStrikePrices(variant) {
+    if (!{{ block.settings.enable_price_strike | default: false }}) return;
+
+    // Get MAP price from metafields or settings
+    const mapPrice = getMapPrice(variant);
+    if (!mapPrice) return;
+
+    // Common Shopify price selectors
+    const priceSelectors = [
+      '.price',
+      '.product-price',
+      '.price__regular',
+      '[data-price]',
+      '.money',
+      '.product__price',
+      '.price-item--regular',
+      '.price-item',
+      '.product-form__price'
+    ];
+
+    priceSelectors.forEach(selector => {
+      const priceElements = document.querySelectorAll(selector);
+      priceElements.forEach(el => {
+        const currentPrice = extractPrice(el.textContent);
+
+        if (currentPrice && currentPrice < mapPrice) {
+          applyPriceStrike(el);
+        } else {
+          removePriceStrike(el);
+        }
+      });
+    });
+  }
+
+  function getMapPrice(variant) {
+    // Try to get MAP price from variant metafields
+    if (variant && variant.metafields && variant.metafields.map_guard) {
+      const variantMapPrice = parseFloat(variant.metafields.map_guard.map_price);
+      if (variantMapPrice) return variantMapPrice;
+    }
+
+    // Fallback to product metafields
+    const productMapPrice = {{ product.metafields.map_guard.map_price | json }};
+    if (productMapPrice) {
+      return parseFloat(productMapPrice);
+    }
+
+    // Fallback to block setting for testing
+    const fallbackMapPrice = {{ block.settings.fallback_map_price | json }};
+    if (fallbackMapPrice) {
+      return parseFloat(fallbackMapPrice);
+    }
+
+    return null;
+  }
+
+  function extractPrice(priceText) {
+    // Extract numeric price from text
+    // Handle formats like: $19.99, £25.00, €30,50, 1,299.99, etc.
+    const cleanText = priceText.replace(/[^\d.,]/g, '');
+
+    // Handle comma as decimal separator (European format)
+    if (cleanText.includes(',') && !cleanText.includes('.')) {
+      return parseFloat(cleanText.replace(/,/g, '.'));
+    }
+
+    // Handle comma as thousands separator
+    if (cleanText.includes(',') && cleanText.includes('.')) {
+      return parseFloat(cleanText.replace(/,/g, ''));
+    }
+
+    // Standard format
+    const match = cleanText.match(/[\d,]+\.?\d*/);
+    return match ? parseFloat(match[0].replace(/,/g, '')) : null;
+  }
+
+  function applyPriceStrike(element) {
+    element.classList.add('map-guard-struck-price');
+    element.style.textDecoration = 'line-through';
+    element.style.opacity = '0.7';
+  }
+
+  function removePriceStrike(element) {
+    element.classList.remove('map-guard-struck-price');
+    element.style.textDecoration = '';
+    element.style.opacity = '';
+  }
+
+  function setupPriceObserver() {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList' || mutation.type === 'characterData') {
+          // Re-check prices when DOM changes (variant switches, AJAX updates)
+          setTimeout(() => {
+            const currentVariant = getCurrentVariant();
+            checkAndStrikePrices(currentVariant);
+          }, 100);
+        }
+      });
+    });
+
+    // Observe the product section for changes
+    const productSection = document.querySelector('.product') ||
+                          document.querySelector('[data-product]') ||
+                          document.querySelector('.product-form');
+
+    if (productSection) {
+      observer.observe(productSection, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    }
+  }
+
+  function getCurrentVariant() {
+    // Try to get current variant from various sources
+    const variantSelect = document.querySelector('[name="id"]');
+    if (variantSelect) {
+      return { id: variantSelect.value };
+    }
+
+    // Fallback to first available variant
+    return {{ product.selected_or_first_available_variant | json }};
+  }
 
   function updateMessageBlock(variant) {
     const messageBlock = document.querySelector('.map-guard-message-block');
@@ -291,6 +433,24 @@
           "label": "Right"
         }
       ]
+    },
+    {
+      "type": "header",
+      "content": "Price Strike-Through"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_price_strike",
+      "label": "Enable Price Strike-Through",
+      "default": false,
+      "info": "Automatically strike through prices below MAP"
+    },
+    {
+      "type": "number",
+      "id": "fallback_map_price",
+      "label": "Fallback MAP Price (for testing)",
+      "default": 100,
+      "info": "Used when no metafield MAP price is found. Set higher than current price to test strike-through."
     },
     {
       "type": "header",
