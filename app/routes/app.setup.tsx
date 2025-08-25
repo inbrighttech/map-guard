@@ -530,6 +530,20 @@ export default function SetupPage() {
                 </ol>
               </BlockStack>
             </Card>
+
+            <Card>
+              <BlockStack gap="400">
+                <Banner title="Need Help?" tone="info">
+                  <p>
+                    Having trouble with setup or configuration? Check out our comprehensive{" "}
+                    <Link to="/app/faq" style={{ textDecoration: 'underline' }}>
+                      FAQ page
+                    </Link>{" "}
+                    for answers to common questions about metafields, admin blocks, theme configuration, and troubleshooting.
+                  </p>
+                </Banner>
+              </BlockStack>
+            </Card>
           </BlockStack>
         </Layout.Section>
       </Layout>
