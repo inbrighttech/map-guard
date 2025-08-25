@@ -1,6 +1,7 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
+import { useI18n } from "../hooks/useI18n";
 import {
   Page,
   Layout,
@@ -31,18 +32,17 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function Index() {
   const { stats } = useLoaderData<typeof loader>();
-
+  const { t } = useI18n();
   return (
     <Page>
-      <TitleBar title="MAP Guard Dashboard" />
+      <TitleBar title={t('dashboard.title')} />
       <Layout>
         <Layout.Section>
           <BlockStack gap="500">
             {/* Welcome Banner */}
-            <Banner title="Welcome to MAP Guard" tone="info">
+            <Banner title={t('dashboard.welcome.title')} tone="info">
               <p>
-                Get started by configuring your MAP policies and admin blocks in the{" "}
-                <Link to="/app/setup">Setup page</Link>.
+                {t('dashboard.welcome.description', { setupLink: <Link to="/app/setup">{t('app.navigation.setup')}</Link> })}
               </p>
             </Banner>
 
@@ -50,14 +50,14 @@ export default function Index() {
             <Card>
               <BlockStack gap="400">
                 <Text variant="headingMd" as="h2">
-                  Quick Overview
+                  {t('dashboard.overview.title')}
                 </Text>
                 <InlineStack gap="800" wrap={false}>
                   <BlockStack gap="200">
                     <InlineStack gap="200" blockAlign="center">
                       <Icon source={ProductIcon} tone="base" />
                       <Text variant="bodyMd" tone="subdued" as="p">
-                        Total Products
+                        {t('dashboard.overview.total_products')}
                       </Text>
                     </InlineStack>
                     <Text variant="heading2xl" as="p">
@@ -69,7 +69,7 @@ export default function Index() {
                     <InlineStack gap="200" blockAlign="center">
                       <Icon source={ShieldCheckMarkIcon} tone="success" />
                       <Text variant="bodyMd" tone="subdued" as="p">
-                        MAP Enabled
+                        {t('dashboard.overview.map_enabled')}
                       </Text>
                     </InlineStack>
                     <Text variant="heading2xl" as="p">
@@ -81,7 +81,7 @@ export default function Index() {
                     <InlineStack gap="200" blockAlign="center">
                       <Badge tone="critical">⚠️</Badge>
                       <Text variant="bodyMd" tone="subdued" as="p">
-                        Violations
+                        {t('dashboard.overview.violations')}
                       </Text>
                     </InlineStack>
                     <Text variant="heading2xl" as="p">
@@ -96,7 +96,7 @@ export default function Index() {
             <Card>
               <BlockStack gap="400">
                 <Text variant="headingMd" as="h2">
-                  Quick Actions
+                  {t('dashboard.quick_actions.title')}
                 </Text>
                 <InlineStack gap="400">
                   <Button
@@ -104,18 +104,18 @@ export default function Index() {
                     icon={SettingsIcon}
                     url="/app/setup"
                   >
-                    Setup MAP Guard
+                    {t('dashboard.quick_actions.setup_map_guard')}
                   </Button>
                   <Button
                     icon={ProductIcon}
                     url="/app/products"
                   >
-                    Manage Products
+                    {t('dashboard.quick_actions.manage_products')}
                   </Button>
                   <Button
                     url="/app/settings"
                   >
-                    App Settings
+                    {t('dashboard.quick_actions.app_settings')}
                   </Button>
                 </InlineStack>
               </BlockStack>
@@ -125,25 +125,24 @@ export default function Index() {
             <Card>
               <BlockStack gap="400">
                 <Text variant="headingMd" as="h2">
-                  Getting Started
+                  {t('dashboard.getting_started.title')}
                 </Text>
                 <BlockStack gap="300">
                   <Text variant="bodyMd" as="p">
-                    MAP Guard helps you maintain minimum advertised price policies across your Shopify store. 
-                    Here's how to get started:
+                    {t('dashboard.getting_started.description')}
                   </Text>
                   <BlockStack gap="200">
                     <Text variant="bodyMd" as="p">
-                      <strong>1. Setup Metafields:</strong> Configure the required metafields for storing MAP data
+                      <strong>1.</strong> {t('dashboard.getting_started.step_1')}
                     </Text>
                     <Text variant="bodyMd" as="p">
-                      <strong>2. Configure Admin Blocks:</strong> Enable the product and variant admin blocks in your theme
+                      <strong>2.</strong> {t('dashboard.getting_started.step_2')}
                     </Text>
                     <Text variant="bodyMd" as="p">
-                      <strong>3. Set MAP Prices:</strong> Use the admin blocks or products page to set MAP prices for your variants
+                      <strong>3.</strong> {t('dashboard.getting_started.step_3')}
                     </Text>
                     <Text variant="bodyMd" as="p">
-                      <strong>4. Monitor Compliance:</strong> Track compliance status and manage violations from the dashboard
+                      <strong>4.</strong> {t('dashboard.getting_started.step_4')}
                     </Text>
                   </BlockStack>
                 </BlockStack>
