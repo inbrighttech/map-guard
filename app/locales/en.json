@@ -1,0 +1,277 @@
+{
+  "app": {
+    "navigation": {
+      "dashboard": "Dashboard",
+      "setup": "Setup", 
+      "products": "Products",
+      "settings": "Settings",
+      "plans": "Plans",
+      "faq": "FAQ"
+    },
+    "general": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "loading": "Loading...",
+      "error": "An error occurred",
+      "success": "Success",
+      "back": "Back",
+      "next": "Next",
+      "previous": "Previous",
+      "search": "Search",
+      "select": "Select",
+      "none": "None",
+      "all": "All",
+      "yes": "Yes",
+      "no": "No"
+    }
+  },
+  "setup": {
+    "title": "Setup Guide",
+    "subtitle": "Get started with MAP Guard in just a few steps",
+    "steps": {
+      "configure": {
+        "title": "Configure Products",
+        "description": "Set MAP prices for your products that need price protection",
+        "action": "Go to Products"
+      },
+      "theme": {
+        "title": "Install Theme Block",
+        "description": "Add the MAP Guard theme block to your store theme",
+        "action": "View Installation Guide"
+      },
+      "test": {
+        "title": "Test & Launch",
+        "description": "Verify everything works correctly before going live",
+        "action": "Run Tests"
+      }
+    },
+    "features": {
+      "title": "Key Features",
+      "enforcement": {
+        "title": "Price Enforcement",
+        "description": "Automatically enforces minimum advertised prices"
+      },
+      "theme_block": {
+        "title": "Theme Integration",
+        "description": "Seamless integration with your store theme"
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Track compliance and performance metrics"
+      }
+    }
+  },
+  "products": {
+    "title": "Product Management",
+    "subtitle": "Configure MAP settings for your products",
+    "search_placeholder": "Search products...",
+    "table": {
+      "product": "Product",
+      "map_price": "MAP Price",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending"
+    },
+    "actions": {
+      "edit_map": "Edit MAP Price",
+      "disable": "Disable",
+      "enable": "Enable"
+    },
+    "empty_state": {
+      "title": "No products configured",
+      "description": "Start by adding MAP prices to your products",
+      "action": "Add MAP Price"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Configure your MAP Guard preferences",
+    "sections": {
+      "general": {
+        "title": "General Settings",
+        "app_name": "App Name",
+        "enable_notifications": "Enable Notifications",
+        "auto_enforcement": "Automatic Enforcement"
+      },
+      "display": {
+        "title": "Display Settings", 
+        "message_text": "Custom Message Text",
+        "icon_style": "Icon Style",
+        "theme_integration": "Theme Integration"
+      },
+      "advanced": {
+        "title": "Advanced Settings",
+        "api_access": "API Access",
+        "webhook_url": "Webhook URL",
+        "debug_mode": "Debug Mode"
+      }
+    }
+  },
+  "plans": {
+    "title": "Plans & Pricing",
+    "subtitle": "Choose the perfect plan for your MAP compliance needs",
+    "banner": {
+      "title": "Choose Your Plan",
+      "description": "Select the plan that best fits your store's needs. You can upgrade or downgrade at any time. Billing is handled through Shopify App Billing."
+    },
+    "usage": {
+      "title": "Current Usage & Limits",
+      "description": "Track your current usage against your plan limits",
+      "products_with_map": "Products with MAP settings",
+      "admin_actions": "Admin actions (this month)",
+      "theme_displays": "Theme block displays (this month)",
+      "current_plan": "Current plan"
+    },
+    "plan_names": {
+      "free": "Free",
+      "starter": "Starter", 
+      "professional": "Professional",
+      "enterprise": "Enterprise"
+    },
+    "plan_descriptions": {
+      "free": "Perfect for testing and small stores",
+      "starter": "Great for growing businesses",
+      "professional": "For established stores",
+      "enterprise": "Tailored solutions for large stores"
+    },
+    "features": {
+      "whats_included": "What's included:",
+      "free": [
+        "Up to 10 products",
+        "Basic MAP enforcement",
+        "Theme block display", 
+        "Email support",
+        "Basic reporting"
+      ],
+      "starter": [
+        "Up to 500 products",
+        "Full MAP enforcement",
+        "Advanced theme tools",
+        "Priority email support",
+        "Detailed analytics"
+      ],
+      "professional": [
+        "Unlimited products",
+        "Advanced analytics",
+        "API access",
+        "Priority support",
+        "Custom integrations"
+      ],
+      "enterprise": [
+        "Everything in Professional",
+        "Custom development", 
+        "24/7 phone support",
+        "SLA guarantees",
+        "Dedicated account manager"
+      ]
+    },
+    "pricing": {
+      "free": "$0",
+      "starter": "$9.99",
+      "professional": "$24.99",
+      "enterprise": "Custom"
+    },
+    "period": {
+      "forever": "forever",
+      "month": "month",
+      "pricing": "pricing"
+    },
+    "buttons": {
+      "current_plan": "Current Plan",
+      "select_plan": "Select Plan",
+      "contact_sales": "Contact Sales"
+    },
+    "badges": {
+      "most_popular": "Most Popular",
+      "current": "Current"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "change_plan": {
+        "question": "Can I change my plan anytime?",
+        "answer": "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and billing is prorated through Shopify."
+      },
+      "billing": {
+        "question": "How does billing work?",
+        "answer": "All billing is handled securely through Shopify App Billing. Charges appear on your Shopify invoice alongside your other app subscriptions."
+      },
+      "limits": {
+        "question": "What happens if I exceed my product limit?",
+        "answer": "We'll notify you when you approach your limit and help you upgrade to a plan that fits your needs. Your existing MAP settings will continue to work."
+      }
+    },
+    "help_banner": {
+      "title": "Need help choosing?",
+      "description": "Our support team can help you select the right plan based on your store size and MAP compliance requirements."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about MAP Guard",
+    "sections": {
+      "getting_started": {
+        "title": "Getting Started",
+        "questions": [
+          {
+            "question": "What is MAP (Minimum Advertised Price)?",
+            "answer": "MAP is the lowest price a retailer can advertise a product for sale. It helps maintain brand value and ensures fair competition among retailers."
+          },
+          {
+            "question": "How does MAP Guard work?",
+            "answer": "MAP Guard automatically monitors and enforces your minimum advertised prices by displaying custom messages when prices fall below your set thresholds."
+          }
+        ]
+      },
+      "setup": {
+        "title": "Setup & Configuration", 
+        "questions": [
+          {
+            "question": "How do I install the theme block?",
+            "answer": "Go to your Shopify admin > Online Store > Themes > Customize. Add the MAP Guard block to your product pages where you want price protection to appear."
+          },
+          {
+            "question": "Can I customize the enforcement message?",
+            "answer": "Yes! You can customize the message text, styling, and icon through the Settings page to match your brand."
+          }
+        ]
+      },
+      "billing": {
+        "title": "Billing & Plans",
+        "questions": [
+          {
+            "question": "Is there a free trial?",
+            "answer": "Yes! We offer a free plan that allows you to test MAP Guard with up to 10 products before upgrading to a paid plan."
+          },
+          {
+            "question": "How is billing handled?",
+            "answer": "All billing is processed securely through Shopify's App Billing system. Charges appear on your regular Shopify invoice."
+          }
+        ]
+      },
+      "troubleshooting": {
+        "title": "Troubleshooting",
+        "questions": [
+          {
+            "question": "The theme block isn't showing up",
+            "answer": "Make sure you've added the MAP Guard theme block in your theme editor and that you have products with MAP prices configured."
+          },
+          {
+            "question": "MAP enforcement isn't working",
+            "answer": "Check that your products have MAP prices set and that the theme block is properly installed on your product pages."
+          }
+        ]
+      }
+    },
+    "contact": {
+      "title": "Still need help?",
+      "description": "Contact our support team for personalized assistance with your MAP compliance needs.",
+      "action": "Contact Support"
+    }
+  }
+}

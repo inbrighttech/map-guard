@@ -6,6 +6,7 @@ import { NavMenu } from "@shopify/app-bridge-react";
 import polarisStyles from "@shopify/polaris/build/esm/styles.css?url";
 
 import { authenticate } from "../shopify.server";
+import { useNavigation } from "../hooks/useI18n";
 
 export const links = () => [{ rel: "stylesheet", href: polarisStyles }];
 
@@ -17,18 +18,19 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function App() {
   const { apiKey } = useLoaderData<typeof loader>();
+  const nav = useNavigation();
 
   return (
     <AppProvider isEmbeddedApp apiKey={apiKey}>
       <NavMenu>
         <Link to="/app" rel="home">
-          Dashboard
+          {nav.dashboard}
         </Link>
-        <Link to="/app/setup">Setup</Link>
-        <Link to="/app/products">Products</Link>
-        <Link to="/app/settings">Settings</Link>
-        <Link to="/app/plans">Plans</Link>
-        <Link to="/app/faq">FAQ</Link>
+        <Link to="/app/setup">{nav.setup}</Link>
+        <Link to="/app/products">{nav.products}</Link>
+        <Link to="/app/settings">{nav.settings}</Link>
+        <Link to="/app/plans">{nav.plans}</Link>
+        <Link to="/app/faq">{nav.faq}</Link>
       </NavMenu>
       <Outlet />
     </AppProvider>

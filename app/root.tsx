@@ -6,6 +6,9 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+// Initialize i18n
+import "./i18n";
+
 export default function App() {
   return (
     <html>
