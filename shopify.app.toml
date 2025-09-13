@@ -1,0 +1,36 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "ef1998fd5d05c71f96ad439fd2b19e0e"
+name = "map-guard"
+application_url = "https://allow-deputy-si-reasoning.trycloudflare.com"
+embedded = true
+handle = "map-guard"
+
+[build]
+automatically_update_urls_on_dev = true
+include_config_on_deploy = true
+
+[webhooks]
+api_version = "2025-07"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/scopes_update" ]
+  uri = "/webhooks/app/scopes_update"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://allow-deputy-si-reasoning.trycloudflare.com/auth/callback",
+  "https://allow-deputy-si-reasoning.trycloudflare.com/auth/shopify/callback",
+  "https://allow-deputy-si-reasoning.trycloudflare.com/api/auth/callback"
+]
+
+[pos]
+embedded = false

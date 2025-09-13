@@ -1,0 +1,59 @@
+{% comment %}
+  MAP Guard Display Block
+  Shows MAP pricing information when enabled
+{% endcomment %}
+
+<div class="map-guard-display">
+  {% if block.settings.show_heading %}
+    <h3>{{ block.settings.heading }}</h3>
+  {% endif %}
+  
+  {% liquid
+    assign current_variant = product.selected_or_first_available_variant
+    assign map_enabled = current_variant.metafields.mapguard.enabled.value
+    assign custom_message = current_variant.metafields.mapguard.custom_message.value
+  %}
+  
+  {% if map_enabled %}
+    <div class="map-message">
+      {% if custom_message != blank %}
+        {{ custom_message }}
+      {% else %}
+        {{ block.settings.message }}
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "MAP Message Display",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "MAP Pricing Information"
+    },
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "Custom Message", 
+      "default": "Please contact us for pricing information.",
+      "info": "Message to display when MAP pricing is active"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_heading",
+      "label": "Show heading",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "MAP Message Display"
+    }
+  ]
+}
+{% endschema %}
