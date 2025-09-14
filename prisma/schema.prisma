@@ -30,3 +30,55 @@ model Session {
   collaborator  Boolean?  @default(false)
   emailVerified Boolean?  @default(false)
 }
+
+model Product {
+  id               String   @id @default(uuid())
+  shopifyVariantId String   @unique
+  shopifyProductId String
+  shop             String
+  price            Decimal
+  mapPrice         Decimal
+  enabled          Boolean  @default(false)
+  message          String?
+  display          Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([shop])
+  @@index([shopifyProductId])
+}
+
+model Subscription {
+  id                String   @id @default(uuid())
+  shop              String   @unique
+  shopifyChargeId   String?
+  planName          String
+  status            String
+  includedProducts  Int
+  overageRate       Decimal
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  trialEndsAt        DateTime?
+  lastBillingAmount  Decimal
+  lastUsageCheck     DateTime @default(now())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  BillingPeriods     BillingPeriod[]
+}
+
+model BillingPeriod {
+  id                String   @id @default(uuid())
+  shop              String
+  subscriptionId    String
+  periodStart       DateTime
+  periodEnd         DateTime
+  maxEnabledProducts Int
+  baseAmount        Decimal
+  overageAmount     Decimal
+  totalAmount       Decimal
+  processed         Boolean  @default(false)
+  Subscription      Subscription @relation(fields: [subscriptionId], references: [id])
+
+  @@index([shop])
+  @@index([shop, periodStart, periodEnd])
+}

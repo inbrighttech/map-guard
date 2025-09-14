@@ -1,0 +1,21 @@
+api_version = "2025-01"
+
+[[extensions]]
+name = "t:name"
+handle = "map-discount-function"
+type = "function"
+uid = "ff98862d-7028-121a-df90-b7c9a7865777f34302b0"
+description = "t:description"
+
+  [[extensions.targeting]]
+  target = "purchase.product-discount.run"
+  input_query = "src/run.graphql"
+  export = "run"
+
+  [extensions.build]
+  command = ""
+  path = "dist/function.wasm"
+
+  [extensions.ui.paths]
+  create = "/"
+  details = "/"
